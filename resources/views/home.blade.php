@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Yudi Interior - Wujudkan Rumah Impian Anda')
+@section('title', 'Yudi Interior - Solusi Interior Modern')
 
 @section('content')
 
@@ -12,7 +12,6 @@
     <title>Hero Slider Interior</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Tambahan CSS opsional jika ingin animasi teks saat load */
         .fade-in-up {
             animation: fadeInUp 1s ease-out;
         }

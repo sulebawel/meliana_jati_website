@@ -4,12 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-/**
- * CONTROLLER: HomeController
- * 
- * Controller ini handle halaman utama website
- * Menampilkan hero section, services, portfolio, testimonials, dan contact form
- */
+
 
 class HomeController extends Controller
 {
@@ -46,35 +41,35 @@ class HomeController extends Controller
         'title' => 'Rumah Modern Minimalis',
         'description' => 'Desain minimalis dengan sentuhan modern untuk rumah keluarga',
         'category' => 'Perumahan',  
-        'gradient' => 'from-purple-400 to-purple-600',
+        'gradient' => 'from-cyan-400 to-indigo-800',
         'image' => 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800'
     ],
     [
         'title' => 'Apartemen Pribadi',
         'description' => 'Interior apartemen dengan konsep scandinavian yang hangat dan nyaman',
         'category' => 'Perumahan',
-        'gradient' => 'from-pink-400 to-red-500',
+        'gradient' => 'from-cyan-400 to-indigo-800',
         'image' => 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800'
     ],
     [
         'title' => 'Kantor',
         'description' => 'Desain kantor modern dengan konsep industrial',
         'category' => 'Komersial',
-        'gradient' => 'from-blue-400 to-cyan-500',
+        'gradient' => 'from-cyan-400 to-indigo-800',
         'image' => 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800'
     ],
     [
         'title' => 'Villa Pribadi',
         'description' => 'Interior villa dengan nuansa tropis yang menyegarkan',
         'category' => 'Perumahan',
-        'gradient' => 'from-green-400 to-teal-500',
+        'gradient' => 'from-cyan-400 to-indigo-800',
         'image' => 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800'
     ],
     [
         'title' => 'Kafe Modern',
         'description' => 'Desain kafe dengan konsep contemporary yang instagramable',
         'category' => 'Komersial',
-        'gradient' => 'from-pink-500 to-yellow-400',
+        'gradient' => 'from-gray-400 to-indigo-800',
         'image' => 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800'
     ],
     [

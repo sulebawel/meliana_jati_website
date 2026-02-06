@@ -60,13 +60,7 @@ class ContactController extends Controller
                 'status' => 'unread'
             ]);
 
-            // LANGKAH 3: Kirim Email Notifikasi (Optional)
-            // Uncomment jika ingin kirim email
-            /*
-            Mail::to('info@yudiinterior.com')->send(
-                new ContactFormSubmitted($request->all())
-            );
-            */
+         
 
             // LANGKAH 4: Redirect dengan pesan sukses
             return redirect('/#contact')

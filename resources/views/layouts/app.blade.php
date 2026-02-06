@@ -126,18 +126,23 @@
             <div class="flex justify-between h-20">
                 
                 <!-- Logo Section -->
-                <div class="flex items-center">
-                    <div class="logo-icon bg-gradient-to-br from-orange-500 to-orange-600 p-2.5 rounded-xl mr-3 shadow-lg transform transition-transform hover:scale-110">
-                        <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
-                        </svg>
-                    </div>
-                    <a href="{{ route('home') }}" class="text-2xl font-bold tracking-tight">
-                        <span class="text-gray-800">Yudi</span>
-                        <span class="text-orange-500">Interior</span>
-                    </a>
-                </div>
-                
+<div class="flex items-center">
+    <a href="{{ route('home') }}" class="flex items-center group">
+        <!-- Logo Image -->
+        <div class="mr-3 transform transition-transform group-hover:scale-105">
+            <img src="{{ asset('images/logo2.svg') }}" 
+                 alt="Yudi Interior Logo" 
+                 class="h-16 w-auto">
+           
+        </div>
+        
+        <!-- Text Logo (opsional - bisa dihapus jika logo sudah include text) -->
+        <span class="text-2xl font-bold tracking-tight">
+            <span class="text-gray-800">Yudi</span>
+            <span class="text-orange-500">Interior</span>
+        </span>
+    </a>
+</div>
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-1">
                     <a href="#home" class="nav-link px-4 py-2 text-gray-700 hover:text-orange-500 font-medium transition-colors duration-200 rounded-lg hover:bg-orange-50">Beranda</a>

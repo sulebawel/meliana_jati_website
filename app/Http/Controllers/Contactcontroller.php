@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * CONTROLLER: ContactController
- * 
+ *
  * Controller ini handle form kontak dan newsletter
  */
 
@@ -16,10 +17,10 @@ class ContactController extends Controller
 {
     /**
      * Store Contact Form Submission
-     * 
+     *
      * Method ini menerima data dari form kontak dan menyimpannya ke database
      * Route: POST /contact
-     * 
+     *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -60,7 +61,7 @@ class ContactController extends Controller
                 'status' => 'unread'
             ]);
 
-         
+
 
             // LANGKAH 4: Redirect dengan pesan sukses
             return redirect('/#contact')
@@ -75,10 +76,10 @@ class ContactController extends Controller
 
     /**
      * Subscribe to Newsletter
-     * 
+     *
      * Method ini handle pendaftaran newsletter
      * Route: POST /newsletter
-     * 
+     *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -124,14 +125,19 @@ class ContactController extends Controller
 
     /**
      * Display All Contacts (Admin)
-     * 
+     *
      * Method ini untuk menampilkan semua pesan kontak (untuk admin panel)
      * Route: GET /admin/contacts
-     * 
+     *
      * @return \Illuminate\View\View
      */
     public function index()
     {
+        // Protect admin route
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            return redirect()->route('login');
+        }
+
         // Ambil semua kontak, urutkan dari yang terbaru
         $contacts = Contact::latestFirst()->paginate(20);
 
@@ -143,17 +149,22 @@ class ContactController extends Controller
 
     /**
      * Show Single Contact (Admin)
-     * 
+     *
      * Method ini untuk menampilkan detail satu pesan
      * Route: GET /admin/contacts/{id}
-     * 
+     *
      * @param int $id
      * @return \Illuminate\View\View
      */
     public function show($id)
     {
+        // Protect admin route
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            return redirect()->route('login');
+        }
+
         $contact = Contact::findOrFail($id);
-        
+
         // Mark as read saat dibuka
         if ($contact->status === 'unread') {
             $contact->markAsRead();
@@ -164,15 +175,20 @@ class ContactController extends Controller
 
     /**
      * Delete Contact (Admin)
-     * 
+     *
      * Method ini untuk menghapus pesan
      * Route: DELETE /admin/contacts/{id}
-     * 
+     *
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
+        // Protect admin route
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            return redirect()->route('login');
+        }
+
         try {
             $contact = Contact::findOrFail($id);
             $contact->delete();

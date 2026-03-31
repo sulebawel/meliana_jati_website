@@ -174,6 +174,89 @@ class ContactController extends Controller
     }
 
     /**
+     * Create Contact Form (Admin)
+     *
+     * @return \Illuminate\View\View
+     */
+    public function create()
+    {
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            return redirect()->route('login');
+        }
+
+        return view('admin.contacts.create');
+    }
+
+    /**
+     * Store Contact (Admin)
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeAdmin(Request $request)
+    {
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            return redirect()->route('login');
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|max:100',
+            'phone' => 'required|string|max:20',
+            'message' => 'required|string',
+            'status' => 'required|in:read,unread'
+        ]);
+
+        Contact::create($validated);
+
+        return redirect()->route('admin.contacts.index')->with('success', 'Pesan berhasil ditambahkan');
+    }
+
+    /**
+     * Edit Contact Form (Admin)
+     *
+     * @param int $id
+     * @return \Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            return redirect()->route('login');
+        }
+
+        $contact = Contact::findOrFail($id);
+        return view('admin.contacts.edit', compact('contact'));
+    }
+
+    /**
+     * Update Contact (Admin)
+     *
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        if (!Auth::check() || Auth::user()->role !== 'admin') {
+            return redirect()->route('login');
+        }
+
+        $contact = Contact::findOrFail($id);
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|max:100',
+            'phone' => 'required|string|max:20',
+            'message' => 'required|string',
+            'status' => 'required|in:read,unread'
+        ]);
+
+        $contact->update($validated);
+
+        return redirect()->route('admin.contacts.index')->with('success', 'Pesan berhasil diperbarui');
+    }
+
+    /**
      * Delete Contact (Admin)
      *
      * Method ini untuk menghapus pesan

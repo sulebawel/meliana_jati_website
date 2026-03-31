@@ -98,11 +98,7 @@
                 </form>
 
                 <!-- Info Box -->
-                <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p class="text-sm text-blue-900 font-medium mb-2">📝 Demo Akun Admin:</p>
-                    <p class="text-xs text-blue-800 mb-1"><strong>Email:</strong> admin@melianajati.com</p>
-                    <p class="text-xs text-blue-800"><strong>Sandi:</strong> Admin@123456</p>
-                </div>
+                
             </div>
 
             <!-- Footer -->

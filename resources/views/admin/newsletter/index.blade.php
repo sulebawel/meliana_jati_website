@@ -10,9 +10,9 @@
         <div>
             <p class="text-gray-600">Total subscriber: <span class="font-bold text-lg">{{ $subscribers->total() }}</span></p>
         </div>
-        <button onclick="downloadCSV()" class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg transition font-medium">
-            ⬇ Export CSV
-        </button>
+        <a href="{{ route('admin.newsletter.create') }}" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition font-medium">
+            + Tambah Subscriber
+        </a>
     </div>
 
     <!-- Tabel Subscriber -->
@@ -47,12 +47,12 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                                 {{ $sub->created_at->format('d M Y') }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <button onclick="sendEmail('{{ $sub->email }}')" class="text-blue-600 hover:text-blue-900 transition">
-                                    Kirim Email
-                                </button>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-3">
+                                <a href="{{ route('admin.newsletter.edit', $sub->id) }}" class="text-blue-600 hover:text-blue-900 transition">
+                                    Edit
+                                </a>
                                 <span class="text-gray-300 mx-2">|</span>
-                                <form action="#" method="POST" style="display:inline" onsubmit="return confirm('Hapus subscriber ini?')">
+                                <form action="{{ route('admin.newsletter.destroy', $sub->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Hapus subscriber ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:text-red-900 transition">
@@ -79,21 +79,11 @@
     </div>
 </div>
 
-<!-- Modal/Info -->
+<!-- Info -->
 <div class="mt-12 bg-purple-50 border border-purple-200 rounded-lg p-6">
     <h3 class="font-semibold text-purple-900 mb-2">📧 Fitur Newsletter</h3>
     <p class="text-purple-900">
-        Anda dapat mengirimkan email newsletter ke seluruh subscriber yang terdaftar. Gunakan fitur "Kirim Email" untuk mengirim pesan promosi atau update kepada subscriber.
+        Anda dapat mengelola subscriber newsletter dari halaman ini. Tambahkan subscriber baru, edit informasi mereka, atau hapus subscriber yang sudah tidak aktif.
     </p>
 </div>
-
-<script>
-    function downloadCSV() {
-        alert('Fitur export CSV akan segera tersedia');
-    }
-
-    function sendEmail(email) {
-        alert('Fitur pengiriman email akan segera dikembangkan untuk: ' + email);
-    }
-</script>
 @endsection

@@ -43,25 +43,49 @@ Route::post('/newsletter', [ContactController::class, 'newsletter'])->name('news
 // Admin - Contacts Management
 Route::prefix('admin')->name('admin.')->group(function () {
 
-    // List all contacts
+    // Contacts
     Route::get('/contacts', [ContactController::class, 'index'])
         ->name('contacts.index');
-
-    // View single contact
+    Route::get('/contacts/create', [ContactController::class, 'create'])
+        ->name('contacts.create');
+    Route::post('/contacts', [ContactController::class, 'storeAdmin'])
+        ->name('contacts.store');
     Route::get('/contacts/{id}', [ContactController::class, 'show'])
         ->name('contacts.show');
-
-    // Delete contact
+    Route::get('/contacts/{id}/edit', [ContactController::class, 'edit'])
+        ->name('contacts.edit');
+    Route::put('/contacts/{id}', [ContactController::class, 'update'])
+        ->name('contacts.update');
     Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])
         ->name('contacts.destroy');
 
     // Portfolio Management
     Route::get('/portfolio', [AdminController::class, 'portfolioIndex'])
         ->name('portfolio');
+    Route::get('/portfolio/create', [AdminController::class, 'portfolioCreate'])
+        ->name('portfolio.create');
+    Route::post('/portfolio', [AdminController::class, 'portfolioStore'])
+        ->name('portfolio.store');
+    Route::get('/portfolio/{id}/edit', [AdminController::class, 'portfolioEdit'])
+        ->name('portfolio.edit');
+    Route::put('/portfolio/{id}', [AdminController::class, 'portfolioUpdate'])
+        ->name('portfolio.update');
+    Route::delete('/portfolio/{id}', [AdminController::class, 'portfolioDestroy'])
+        ->name('portfolio.destroy');
 
-    // Newsletter Management (menampilkan semua subscriber)
+    // Newsletter Management
     Route::get('/newsletter', [AdminController::class, 'newsletterIndex'])
         ->name('newsletter');
+    Route::get('/newsletter/create', [AdminController::class, 'newsletterCreate'])
+        ->name('newsletter.create');
+    Route::post('/newsletter', [AdminController::class, 'newsletterStore'])
+        ->name('newsletter.store');
+    Route::get('/newsletter/{id}/edit', [AdminController::class, 'newsletterEdit'])
+        ->name('newsletter.edit');
+    Route::put('/newsletter/{id}', [AdminController::class, 'newsletterUpdate'])
+        ->name('newsletter.update');
+    Route::delete('/newsletter/{id}', [AdminController::class, 'newsletterDestroy'])
+        ->name('newsletter.destroy');
 });
 
 
@@ -75,4 +99,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::fallback(function () {
     return view('errors.404');
 });
+
 

@@ -10,6 +10,9 @@
         <div>
             <p class="text-gray-600">Total pesan: <span class="font-bold text-lg">{{ $contacts->total() }}</span></p>
         </div>
+        <a href="{{ route('admin.contacts.create') }}" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition font-medium">
+            + Tambah Pesan
+        </a>
     </div>
 
     <!-- Tabel Pesan -->
@@ -51,6 +54,9 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-3">
                                 <a href="{{ route('admin.contacts.show', $contact->id) }}" class="text-orange-600 hover:text-orange-900 transition">
                                     Lihat
+                                </a>
+                                <a href="{{ route('admin.contacts.edit', $contact->id) }}" class="text-blue-600 hover:text-blue-900 transition">
+                                    Edit
                                 </a>
                                 <form action="{{ route('admin.contacts.destroy', $contact->id) }}" method="POST" style="display:inline" onsubmit="return confirm('Hapus pesan ini?')">
                                     @csrf

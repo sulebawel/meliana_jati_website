@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Portfolio;
 use Illuminate\Http\Request;
-
-
 
 class HomeController extends Controller
 {
@@ -35,51 +34,16 @@ class HomeController extends Controller
             ],
         ];
 
-        // Data untuk Portfolio Section
-       $portofolios = [
-    [
-        'title' => 'Meja tarik 3M',
-        'description' => 'Desain ruang tamu dengan konsep minimalis dan elegan yang cocok untuk keluarga',
-        'category' => 'Perumahan',
-        'gradient' => 'from-cyan-400 to-indigo-800',
-        'image' => 'https://i.pinimg.com/736x/f3/7e/41/f37e41c85359b456b1e915f9db8875b4.jpg'
-    ],
-    [
-        'title' => 'Meja piknik kotak',
-        'description' => 'Desain ruang makan dengan konsep modern yang cocok untuk cafe',
-        'category' => 'Perumahan',
-        'gradient' => 'from-cyan-400 to-indigo-800',
-        'image' => 'https://i.pinimg.com/736x/a5/30/09/a5300988a96b0d461377a3fa372692e5.jpg'
-    ],
-    [
-        'title' => 'kursi lempit',
-        'description' => 'Desain ruang kantor dengan konsep moderen dan nyaman',
-        'category' => 'Perumahan',
-        'gradient' => 'from-cyan-400 to-indigo-800',
-        'image' => 'https://i.pinimg.com/1200x/3b/50/11/3b50113f31a1693e9fc4dec698dfae45.jpg'
-    ],
-    [
-        'title' => 'Almari makan',
-        'description' => 'desain furniture custom untuk ruang tamu dengan konsep minimalis dan elegan',
-        'category' => 'Perumahan',
-        'gradient' => 'from-cyan-400 to-indigo-800',
-        'image' => 'https://i.pinimg.com/736x/f4/04/ed/f404ed0a384b307902e8bd5f64d55f39.jpg'
-    ],
-    [
-        'title' => 'Meja makan',
-        'description' => 'Desain ruang makan dengan konsep modern dan elegan yang cocok untuk keluarga',
-        'category' => 'Perumahan',
-        'gradient' => 'from-gray-400 to-indigo-800',
-        'image' => 'https://i.pinimg.com/1200x/d8/ea/86/d8ea863baa2d59c5de03f775cf7e1138.jpg'
-    ],
-    [
-        'title' => 'Kursi belajar',
-        'description' => 'furnitur custom untuk ruang belajar anak dengan desain yang fun dan edukatif',
-        'category' => 'Perumahan',
-        'gradient' => 'from-cyan-400 to-indigo-800',
-        'image' => 'https://i.pinimg.com/1200x/69/52/01/69520193fbc2c2f7be1128a7b0bc531f.jpg'
-    ]
-];
+        // Data untuk Portfolio Section - dari Database
+        $portofolios = Portfolio::latest()->get()->map(function ($item) {
+            return [
+                'title' => $item->title,
+                'description' => $item->description,
+                'gradient' => 'from-cyan-400 to-indigo-800',
+                'image' => $item->image ?? 'https://via.placeholder.com/400x300?text=Portfolio'
+            ];
+        })->toArray();
+
         // Data untuk Testimonials Section
         $testimonials = [
             [
@@ -135,12 +99,7 @@ class HomeController extends Controller
      */
     public function portfolio()
     {
-        $portofolios = [
-            ['title' => 'Meja tarik 3M', 'image' => 'https://i.pinimg.com/736x/f3/7e/41/f37e41c85359b456b1e915f9db8875b4.jpg'],
-            ['title' => 'Meja piknik', 'image' => 'https://i.pinimg.com/736x/a5/30/09/a5300988a96b0d461377a3fa372692e5.jpg'],
-            ['title' => 'Kursi lempit', 'image' => 'https://i.pinimg.com/1200x/3b/50/11/3b50113f31a1693e9fc4dec698dfae45.jpg']
-        ];
-
+        $portofolios = Portfolio::latest()->get();
         return view('portfolio', compact('portofolios'));
     }
 
@@ -149,20 +108,8 @@ class HomeController extends Controller
      */
     public function showPortfolio($id)
     {
-        $portofolios = [
-            ['title' => 'Meja tarik 3M', 'image' => 'https://i.pinimg.com/736x/f3/7e/41/f37e41c85359b456b1e915f9db8875b4.jpg', 'description' => 'Desain ruang tamu dengan konsep minimalis dan elegan.'],
-            ['title' => 'Meja piknik', 'image' => 'https://i.pinimg.com/736x/a5/30/09/a5300988a96b0d461377a3fa372692e5.jpg', 'description' => 'Desain meja santai dengan konsep modern.'],
-            ['title' => 'Kursi lempit', 'image' => 'https://i.pinimg.com/1200x/3b/50/11/3b50113f31a1693e9fc4dec698dfae45.jpg', 'description' => 'Desain kursi yang fungsional dan nyaman.']
-        ];
-
-        $index = (int) $id;
-
-        if (!isset($portofolios[$index])) {
-            abort(404);
-        }
-
-        $item = $portofolios[$index];
-        return view('portfolio-show', compact('item', 'index'));
+        $item = Portfolio::findOrFail($id);
+        return view('portfolio-show', compact('item'));
     }
 
     /**

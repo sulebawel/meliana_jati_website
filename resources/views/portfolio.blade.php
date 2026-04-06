@@ -4,7 +4,7 @@
 
 @section('content')
 <section id="portfolio" class="max-w-7xl mx-auto px-4 py-20">
-    <h1 class="text-4xl font-bold mb-6">Portofolio</h1>
+    <h1 class="text-4xl font-bold mb-6">Produk</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         @forelse($portofolios as $item)

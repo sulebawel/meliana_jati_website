@@ -10,5 +10,6 @@ class Portfolio extends Model
         'title',
         'description',
         'image',
+        'price',
     ];
 }

@@ -25,11 +25,10 @@
                     <a href="{{ route('home') }}"
                         class="{{ request()->routeIs('home') ? 'text-orange-500' : 'hover:text-orange-500' }} transition">Home</a>
 
-                    <a href="{{ route('about') }}"
-                        class="{{ request()->routeIs('about') ? 'text-orange-500' : 'hover:text-orange-500' }} transition">Tentang</a>
+                    
 
                     <a href="{{ route('portfolio') }}"
-                        class="{{ request()->routeIs('portfolio') ? 'text-orange-500' : 'hover:text-orange-500' }} transition">Portfolio</a>
+                        class="{{ request()->routeIs('portfolio') ? 'text-orange-500' : 'hover:text-orange-500' }} transition">Produk</a>
 
                     <a href="{{ route('contact') }}"
                         class="{{ request()->routeIs('contact') ? 'text-orange-500' : 'hover:text-orange-500' }} transition">Kontak</a>
